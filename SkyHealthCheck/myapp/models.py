@@ -41,4 +41,4 @@ class CustomUser(AbstractUser):
         ('senior_manager', 'Senior Manager'),
     ]
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='engineer')
-    
+    pass 

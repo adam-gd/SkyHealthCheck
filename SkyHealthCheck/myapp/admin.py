@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Department, Team, HealthCard, Session
 from .models import CustomUser
+from django.contrib.auth.admin import UserAdmin
 
 @admin.register(Department)
 class DepartmentAdmin(admin.ModelAdmin):
@@ -20,13 +21,6 @@ class SessionAdmin(admin.ModelAdmin):
     list_display = ('name', 'start_date', 'end_date')
     
     
-
-class CustomUserAdmin(UserAdmin):
-    model = CustomUser
-    list_display = ['username', 'email', 'role', 'is_staff']
-
-admin.site.register(CustomUser, CustomUserAdmin)
-
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
