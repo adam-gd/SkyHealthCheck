@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Agreements</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-title img {
+            height: 50px;
+        }
+        
+        .logo-title h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #f0e8fa;
+            border-radius: 50px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+        
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .search-icon {
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .profile-btn {
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logout-btn {
+            background-color: #111;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .settings-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            gap: 10px;
+            background-color: white;
+        }
+        
+        .nav-btn {
+            background-color: #ffd180;
+            border: 1px solid #e0a030;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 150px;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background-color: #ffb74d;
+        }
+        
+        .main-content {
+            background: linear-gradient(to right, #f8c471, #c39bd3, #7fb3d5);
+            padding: 20px;
+            min-height: calc(100vh - 150px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .agreement-card {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 900px;
+            text-align: center;
+        }
+        
+        .card-section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .section-text {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .questions-section {
+            color: #3498db;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: none;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .submit-btn {
+            background-color: #ffd180;
+            border: 1px solid #e0a030;
+            border-radius: 5px;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 10px;
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .proceed-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .proceed-btn {
+            background-color: #ffd180;
+            border: 1px solid #e0a030;
+            border-radius: 5px;
+            padding: 12px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-title">
+            <img src="/myapp/photos/sky_logo.png" alt="Sky Logo">
+            <h1>AGREEMENTS</h1>
+        </div>
+        
+        <div class="search-container">
+            <span>Hinted search text</span>
+            <div class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="user-actions">
+            <button class="profile-btn">Profile</button>
+            <button class="logout-btn">logout</button>
+            <button class="settings-btn">⚙️</button>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-btn">Home</button>
+        <button class="nav-btn">Health-Check</button>
+        <button class="nav-btn">Agreements</button>
+        <button class="nav-btn">Admin</button>
+        <button class="nav-btn">Overview</button>
+    </div>
+    
+    <div class="main-content">
+        <div class="agreement-card">
+            <div class="card-section">
+                <div class="section-title">DATA STORAGE</div>
+                <div class="section-text">
+                    "Your privacy is important to us . By using our website. You agree that we<br>
+                    will take all necessary measures to protect and secure your personal data. We<br>
+                    are committed to safeguarding your information through industry-standard<br>
+                    encryption<br>
+                    and security protocols. rest assured your data will only be used for the purpose<br>
+                    outlined in our privacy policy.<br>
+                    We will not share it with third parties without you consent.<br>
+                    for more details please refer to our privacy policy.
+                </div>
+            </div>
+            
+            <div class="card-section">
+                <div class="section-title">SURVEYS</div>
+                <div class="section-text">
+                    "By participating in our website survey, you agree to provide honest and accurate<br>
+                    responses to the questions presented. Your feedback is valuable and will be used to<br>
+                    improve our services.<br>
+                    All responses will be kept confidential and will only be used for research and analysis<br>
+                    purposes
+                </div>
+            </div>
+            
+            <div class="questions-section">
+                ASK US ANY QUESTIONS ABOUT THE AGREEMENTS YOU ARE MAKING
+            </div>
+            
+            <textarea placeholder="INSERT TEXT HERE..."></textarea>
+            
+            <div>
+                <button class="submit-btn">SUBMIT</button>
+            </div>
+            
+            <div class="checkbox-group">
+                <label>I HAVE READ THE AGREEMENTS</label>
+                <input type="checkbox" class="checkbox">
+            </div>
+            
+            <div class="checkbox-group">
+                <label>I UNDERSTAND AND AGREE TO PROCEED</label>
+                <input type="checkbox" class="checkbox">
+            </div>
+        </div>
+    </div>
+    
+    <div class="proceed-btn-container">
+        <button class="proceed-btn">PROCEED</button>
+    </div>
+</body>
+</html>

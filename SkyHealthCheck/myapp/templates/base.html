@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Admin Dashboard{% endblock %}</title>
+
+  <!-- FontAwesome for icons: replace with your kit URL -->
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Color variables */
+    :root {
+      --primary: #2C3E50;
+      --secondary: #2980B9;
+      --accent: #E74C3C;
+      --bg-light: #ECF0F1;
+      --text-light: #FFFFFF;
+      --text-dark: #2C3E50;
+    }
+
+    /* Global resets */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    body { display:flex; min-height:100vh; background:var(--bg-light); color:var(--text-dark); }
+
+    /* Sidebar */
+    .sidebar { width:260px; background:var(--primary); display:flex; flex-direction:column; }
+    .sidebar .user-card { background:var(--secondary); margin:20px; padding:20px; border-radius:8px; text-align:center; }
+    .sidebar .user-card img { width:70px; height:70px; border-radius:50%; object-fit:cover; margin-bottom:10px; border:2px solid var(--accent); }
+    .sidebar .user-card h4 { color:var(--text-light); font-size:18px; }
+    .sidebar .user-card p { color:var(--text-light); font-size:14px; }
+    .sidebar nav { margin-top:10px; }
+    .sidebar nav a { display:flex; align-items:center; padding:14px 22px; color:var(--text-light); text-decoration:none; font-weight:500; transition:background .2s; }
+    .sidebar nav a i { margin-right:12px; }
+    .sidebar nav a:hover, .sidebar nav a.active { background:var(--accent); }
+
+    /* Main wrapper */
+    .wrapper { flex:1; display:flex; flex-direction:column; }
+
+    /* Top navbar */
+    .navbar { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:var(--bg-light); border-bottom:1px solid #d1d5da; }
+    .navbar .logo-title { display:flex; align-items:center; }
+    .navbar .logo-title img { height:45px; margin-right:10px; }
+    .navbar .links a { margin-left:18px; color:var(--text-dark); text-decoration:none; padding:8px 14px; border-radius:4px; font-size:14px; }
+    .navbar .links a:hover, .navbar .links a.active { background:var(--secondary); color:var(--text-light); }
+
+    /* Content cards */
+    .content { flex:1; padding:30px; overflow-y:auto; }
+    .card { background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); padding:24px; margin-bottom:20px; }
+    .card h2 { margin-bottom:16px; color:var(--secondary); }
+    .card p { line-height:1.6; font-size:15px; }
+
+    /* Buttons & forms */
+    .btn { cursor:pointer; font-weight:600; border:none; }
+    .btn-primary { background:var(--secondary); color:var(--text-light); padding:10px 24px; border-radius:4px; transition:background .2s; }
+    .btn-primary:hover { background:#2471A3; }
+    .btn-accent { background:var(--accent); color:var(--text-light); padding:10px 24px; border-radius:4px; transition:background .2s; }
+    .btn-accent:hover { background:#C0392B; }
+    textarea { width:100%; padding:12px; border:1px solid #ccc; border-radius:4px; font-size:14px; resize:vertical; margin-bottom:20px; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="user-card">
+      <img src="{% static 'myapp/photos/user-avatar.png' %}" alt="User Photo">
+      <h4>{{ request.user.get_full_name }}</h4>
+      <p>{{ request.user.email }}</p>
+    </div>
+    <nav>
+      <a href="{% url 'admin:index' %}" class="active"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+      <a href="{% url 'admin:myapp_department_changelist' %}"><i class="fas fa-sitemap"></i>Departments</a>
+      <a href="{% url 'admin:myapp_team_changelist' %}"><i class="fas fa-users"></i>Teams</a>
+      <a href="{% url 'admin:myapp_healthcard_changelist' %}"><i class="fas fa-id-card"></i>Health Cards</a>
+      <a href="{% url 'admin:myapp_session_changelist' %}"><i class="far fa-calendar"></i>Sessions</a>
+      <a href="{% url 'admin:auth_user_changelist' %}"><i class="fas fa-user"></i>Users</a>
+    </nav>
+  </aside>
+
+  <!-- Main area -->
+  <div class="wrapper">
+
+    <!-- Top navbar -->
+    <header class="navbar">
+      <div class="logo-title">
+        <img src="{% static 'myapp/photos/sky_logo.png' %}" alt="Sky Logo">
+        <h1>{% block title %}Admin Dashboard{% endblock %}</h1>
+      </div>
+      <div class="links">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'agreements' %}">Agreements</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="content">
+      {% block content %}{% endblock %}
+    </main>
+
+  </div>
+</body>
+</html>
