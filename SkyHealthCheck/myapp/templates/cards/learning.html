@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Health Check</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-title img {
+            height: 50px;
+        }
+        
+        .logo-title h1 {
+            font-size: 28px;
+            font-weight: normal;
+            color: #333;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #f0e8fa;
+            border-radius: 5px;
+            padding: 5px 15px;
+            width: 300px;
+        }
+        
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .search-icon {
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .profile-btn {
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logout-btn {
+            background-color: #111;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .settings-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #ffd180;
+            border: 1px solid #e0a030;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 150px;
+            text-align: center;
+        }
+        
+        .nav-btn:hover {
+            background-color: #ffb74d;
+        }
+        
+        .progress-bar {
+            margin: 20px 40px;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 50%;
+            background-color: #9c27b0;
+            border-radius: 10px;
+        }
+        
+        .content {
+            padding: 0 40px;
+            margin-bottom: 40px;
+        }
+        
+        .progress-indicator {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 32px;
+            color: #000;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+        }
+        
+        .form-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .dropdown-container {
+            position: relative;
+            width: 220px;
+        }
+        
+        .dropdown-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+        }
+        
+        .dropdown-btn:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #000;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #d9d9d9;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            z-index: 10;
+            display: none;
+        }
+        
+        .dropdown-container.active .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+            border-bottom: 1px solid #bbb;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #c0c0c0;
+        }
+        
+        .dropdown-item.red {
+            color: red;
+        }
+        
+        .dropdown-item.yellow {
+            color: #cccc00;
+        }
+        
+        .dropdown-item.green {
+            color: green;
+        }
+        
+        .text-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 40px auto;
+            width: 60%;
+            max-width: 600px;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .action-btn {
+            background-color: #ffc107;
+            border: 1px solid #e0a800;
+            border-radius: 5px;
+            width: 80px;
+            height: 60px;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .action-btn.confirm {
+            border: 2px solid #000;
+        }
+        
+        .action-btn:hover {
+            background-color: #ffcd38;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-title">
+            <img src="/myapp/photos/sky_logo.png" alt="Sky Logo">
+            <h1>Health Check</h1>
+        </div>
+        
+        <div class="search-container">
+            <span>Hinted search text</span>
+            <div class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="user-actions">
+            <button class="profile-btn">Profile</button>
+            <button class="logout-btn">logout</button>
+            <button class="settings-btn">⚙️</button>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-btn">Home</button>
+        <button class="nav-btn">Health-Check</button>
+        <button class="nav-btn">Agreements</button>
+        <button class="nav-btn">Admin</button>
+        <button class="nav-btn">Overview</button>
+    </div>
+    
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    
+    <div class="content">
+        <div class="progress-indicator">4 of 10</div>
+        
+        <h2 class="section-title">4.<br/>learning</h2>
+        
+        <div class="form-container">
+            <div class="dropdown-container">
+                <button class="dropdown-btn" onclick="toggleDropdown('state-dropdown')">Select State</button>
+                <div class="dropdown-content" id="state-dropdown">
+                    <div class="dropdown-item red" onclick="selectOption('state-dropdown', 'Red')">Red</div>
+                    <div class="dropdown-item yellow" onclick="selectOption('state-dropdown', 'Yellow')">Yellow</div>
+                    <div class="dropdown-item green" onclick="selectOption('state-dropdown', 'Green')">Green</div>
+                </div>
+            </div>
+            
+            <div class="dropdown-container">
+                <button class="dropdown-btn" onclick="toggleDropdown('trend-dropdown')">Select Trend</button>
+                <div class="dropdown-content" id="trend-dropdown">
+                    <div class="dropdown-item" onclick="selectOption('trend-dropdown', 'Improving')">Improving</div>
+                    <div class="dropdown-item" onclick="selectOption('trend-dropdown', 'Stable')">Stable</div>
+                    <div class="dropdown-item" onclick="selectOption('trend-dropdown', 'Getting Worse')">Getting Worse</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-inputs">
+            <input type="text" class="text-input" placeholder="Add a comment">
+            <input type="text" class="text-input" placeholder="Action team can take">
+            <input type="text" class="text-input" placeholder="Action org can take">
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-btn">&lt;</button>
+            <button class="action-btn confirm">✓</button>
+        </div>
+    </div>
+    
+    <script>
+        function toggleDropdown(id) {
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-container').forEach(container => {
+                if (container.querySelector('.dropdown-content').id !== id) {
+                    container.classList.remove('active');
+                }
+            });
+            
+            // Toggle the clicked dropdown
+            const container = document.getElementById(id).parentElement;
+            container.classList.toggle('active');
+        }
+        
+        function selectOption(dropdown, value) {
+            const container = document.getElementById(dropdown).parentElement;
+            container.querySelector('.dropdown-btn').textContent = value;
+            container.classList.remove('active');
+        }
+        
+        // Close dropdowns when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.dropdown-btn') && !e.target.matches('.dropdown-item')) {
+                document.querySelectorAll('.dropdown-container').forEach(container => {
+                    container.classList.remove('active');
+                });
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const confirmBtn = document.querySelector(".action-btn.confirm");
+            const inputs = document.querySelectorAll(".text-input");
+    
+            confirmBtn.addEventListener("click", function () {
+                let allFilled = true;
+    
+                inputs.forEach(input => {
+                    if (input.value.trim() === "") {
+                        allFilled = false;
+                        input.style.border = "2px solid red"; // highlight empty fields
+                    } else {
+                        input.style.border = ""; // reset border if filled
+                    }
+                });
+    
+                if (allFilled) {
+                    // Redirect to the desired page
+                    window.location.href = "cards/mission"; // replace with your URL
+                } else {
+                    alert("Please fill in all fields before continuing.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

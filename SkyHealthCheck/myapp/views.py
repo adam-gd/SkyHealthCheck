@@ -2,6 +2,9 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from .forms import RegisterForm
+from django.contrib import messages
+from django.http import Http404
 
 # Create your views here.
 from django.shortcuts import render, redirect
@@ -9,6 +12,18 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 
+
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account created successfully!')
+            return redirect('login')  # Or wherever you want
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
 
 def login_page(request):
     return render(request, 'myapp/login.html')
@@ -39,10 +54,29 @@ def dashboard_view(request):
 
 
 def delivering_value_view(request):
-    return render(request, 'delivering_value.html')
+    return render(request, 'cards/delivering_value.html')
 
 def easy_to_release_view(request):
-    return render(request, 'easy_to_release.html')
+    return render(request, 'cards/easy_to_release.html')
+
+def fun_view(request):
+    return render(request, 'cards/fun.html')
+
+def learning_view(request):
+    return render(request, 'cards/learning.html')
+
+def mission_view(request):
+    return render(request, 'cards/mission.html')
+
+def speed_view(request):
+    return render(request, 'cards/speed.html')
+
+def support_view(request):
+    return render(request, 'cards/support.html')
+
+def teamwork_view(request):
+    return render(request, 'cards/teamwork.html')
+
 
 def overview_view(request):
     return render(request, 'overview.html')
@@ -70,3 +104,23 @@ def department_leader_view(request):
 
 def admin_login_view(request):
     return render(request, 'admin_login.html')
+
+def admin_dashboard_view(request):
+    return render(request, 'admin/admin_dashboard.html')
+
+def user_management_view(request):
+    return render(request, 'admin/user_management.html')
+
+
+def team_management_view(request):
+    return render(request, 'admin/team_management.html')
+
+
+def session_management_view(request):
+    return render(request, 'admin/session_management.html')
+
+def department_management_view(request):
+    return render(request, 'admin/department_management.html')
+
+def card_management_view(request):
+    return render(request, 'admin/card_management.html')
