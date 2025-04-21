@@ -114,7 +114,16 @@
             min-width: 100px;
             text-align: center;
         }
-        
+        .instructions {
+            position: absolute;
+            left: 0;
+            top: 60px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
         /* Updated styles for the content below navbar */
         .content-container {
             max-width: 800px;
@@ -179,6 +188,11 @@
             height: 40px;
             background-color: #ddd;
             margin-left: 25px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
         .vote-marker {
@@ -190,41 +204,26 @@
             transform: translateX(-50%);
         }
         
-        .support-card {
-            position: relative;
-        }
-        
-        .support-outline {
-            position: absolute;
-            left: 0;
-            top: -10px;
-            width: 45%;
-            height: 60px;
-            border: 1px dashed #777;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .support-text {
-            font-size: 14px;
-        }
-        
-        .instructions {
-            position: absolute;
-            left: 0;
-            top: 60px;
-            text-align: left;
-            font-size: 16px;
+        /* Placeholder styling */
+        .vote-status {
             font-weight: bold;
-            line-height: 1.4;
+        }
+        .vote-trend {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 2px;
+        }
+        .vote-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="logo-container">
-            {% load static %}
             <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo" class="logo">
             <span class="logo-text">Vote</span>
         </div>
@@ -254,68 +253,178 @@
             <div class="session-dropdown">
                 <span class="dropdown-arrow">▼</span>
             </div>
+
         </div>
-        
+                      
         <div class="voting-area">
             <div class="vertical-line"></div>
-            
+            <div class="instructions">
+                click on the card<br>
+                to view/change<br>
+                vote
+            </div>
+            <!-- Teamwork -->
+            <a href="{% url 'teamwork' %}"  class="vote-link">
             <div class="vote-item">
                 <div class="vote-label">Teamwork</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
+                <div class="vote-bar">
+                    <div class="vote-status" id="teamwork-status"></div>
+                    <div class="vote-trend"  id="teamwork-trend"></div>
+                </div>
             </div>
             
-            <div class="vote-item support-card">
-                <div class="support-outline">
-                    <span class="support-text">support</span>
-                </div>
-                <div class="vote-label"></div>
+            <!-- Support -->
+            <a href="{% url 'support' %}"  class="vote-link">
+            <div class="vote-item">
+                <div class="vote-label">Support</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
-                <div class="instructions">
-                    click on the card<br>
-                    to view/change<br>
-                    vote
+                <div class="vote-bar">
+                    <div class="vote-status" id="support-status"></div>
+                    <div class="vote-trend"  id="support-trend"></div>
                 </div>
             </div>
             
+            <!-- Speed -->
+            <a href="{% url 'speed' %}"  class="vote-link">
             <div class="vote-item">
                 <div class="vote-label">Speed</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
+                <div class="vote-bar">
+                    <div class="vote-status" id="speed-status"></div>
+                    <div class="vote-trend"  id="speed-trend"></div>
+                </div>
             </div>
             
+            <!-- Mission -->
+            <a href="{% url 'mission' %}"  class="vote-link">
             <div class="vote-item">
                 <div class="vote-label">Mission</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
+                <div class="vote-bar">
+                    <div class="vote-status" id="mission-status"></div>
+                    <div class="vote-trend"  id="mission-trend"></div>
+                </div>
             </div>
             
+            <!-- Learning -->
+            <a href="{% url 'learning' %}"  class="vote-link">
             <div class="vote-item">
                 <div class="vote-label">Learning</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
+                <div class="vote-bar">
+                    <div class="vote-status" id="learning-status"></div>
+                    <div class="vote-trend"  id="learning-trend"></div>
+                </div>
             </div>
             
+            <!-- Delivering Value -->
+            <a href="{% url 'delivering_value' %}"  class="vote-link">
             <div class="vote-item">
                 <div class="vote-label">Delivering Value</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
+                <div class="vote-bar">
+                    <div class="vote-status" id="delivering_value-status"></div>
+                    <div class="vote-trend"  id="delivering_value-trend"></div>
+                </div>
             </div>
             
+            <!-- Easy to Release -->
+            <a href="{% url 'easy_to_release' %}"  class="vote-link">
             <div class="vote-item">
-                <div class="vote-label">Easy to release</div>
+                <div class="vote-label">Easy to Release</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
+                <div class="vote-bar">
+                    <div class="vote-status" id="easy_to_release-status"></div>
+                    <div class="vote-trend"  id="easy_to_release-trend"></div>
+                </div>
             </div>
             
+            <!-- Fun -->
+            <a href="{% url 'fun' %}"  class="vote-link">
             <div class="vote-item">
                 <div class="vote-label">Fun</div>
                 <div class="vote-marker"></div>
-                <div class="vote-bar"></div>
+                <div class="vote-bar">
+                    <div class="vote-status" id="fun-status"></div>
+                    <div class="vote-trend"  id="fun-trend"></div>
+                </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        // Function to get votes from session storage or use default values
+        function getVotes() {
+            const storedVotes = sessionStorage.getItem('votes');
+            if (storedVotes) {
+                return JSON.parse(storedVotes);
+            } else {
+                // Default values
+                const defaultVotes = {
+                    teamwork:          { state: 'yellow', trend: 'Stable' },
+                    support:           { state: 'green',  trend: 'Improving' },
+                    speed:             { state: 'red',    trend: 'Getting Worse' },
+                    mission:           { state: 'yellow', trend: 'Stable' },
+                    learning:          { state: 'green',  trend: 'Improving' },
+                    delivering_value:  { state: 'yellow', trend: 'Stable' },
+                    easy_to_release:   { state: 'red',    trend: 'Getting Worse' },
+                    fun:               { state: 'green',  trend: 'Improving' }
+                };
+                sessionStorage.setItem('votes', JSON.stringify(defaultVotes));
+                return defaultVotes;
+            }
+        }
 
+        // Load and display votes (state + trend)
+        function loadVotes() {
+            const votes = getVotes();
+            const categories = [
+                'teamwork',
+                'support',
+                'speed',
+                'mission',
+                'learning',
+                'delivering_value',
+                'easy_to_release',
+                'fun'
+            ];
+
+            categories.forEach(id => {
+                const { state = '—', trend = '—' } = votes[id] || {};
+                // update state
+                const statusEl = document.getElementById(id + '-status');
+                if (statusEl) {
+                    statusEl.textContent = state.toUpperCase();
+                    statusEl.className = 'vote-status ' + state.toLowerCase();
+                }
+                // update trend
+                const trendEl = document.getElementById(id + '-trend');
+                if (trendEl) {
+                    trendEl.textContent = trend;
+                    trendEl.className = 'vote-trend';
+                }
+            });
+        }
+
+        // Redirect to the specific voting page (unchanged)
+        function redirectToVotePage(category) {
+            const formattedCategory = category.replace(/_/g, '-').toLowerCase();
+            window.location.href = "{% url 'vote'  %}".replace('placeholder', formattedCategory);
+        }
+
+        // On load…
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVotes();
+
+            // session‑selector logic (unchanged)
+            const sessionDropdown = document.querySelector('.session-dropdown');
+            if (sessionDropdown) {
+                sessionDropdown.addEventListener('click', function() {
+                    alert('Session selector clicked');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
