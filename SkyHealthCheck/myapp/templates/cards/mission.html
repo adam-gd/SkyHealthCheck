@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -286,7 +287,7 @@
 <body>
     <div class="header">
         <div class="logo-title">
-            <img src="/myapp/photos/sky_logo.png" alt="Sky Logo">
+            <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo" class="logo">
             <h1>Health Check</h1>
         </div>
         
@@ -319,7 +320,7 @@
     </div>
     
     <div class="content">
-        <div class="progress-indicator">5 of 10</div>
+        <div class="progress-indicator">5 of 8</div>
         
         <h2 class="section-title">5.<br/>mission</h2>
         
@@ -374,7 +375,7 @@
             container.querySelector('.dropdown-btn').textContent = value;
             container.classList.remove('active');
         }
-        
+    
         // Close dropdowns when clicking outside
         window.addEventListener('click', function(e) {
             if (!e.target.matches('.dropdown-btn') && !e.target.matches('.dropdown-item')) {
@@ -383,14 +384,17 @@
                 });
             }
         });
-
+        
         document.addEventListener("DOMContentLoaded", function () {
             const confirmBtn = document.querySelector(".action-btn.confirm");
             const inputs = document.querySelectorAll(".text-input");
     
-            confirmBtn.addEventListener("click", function () {
+            confirmBtn.addEventListener("click", function (event) {
+                event.preventDefault();  // Prevent form submission
+    
                 let allFilled = true;
     
+                // Validate if all fields are filled
                 inputs.forEach(input => {
                     if (input.value.trim() === "") {
                         allFilled = false;
@@ -400,9 +404,9 @@
                     }
                 });
     
+                // If all fields are filled, redirect to 'easy_to_release/' page
                 if (allFilled) {
-                    // Redirect to the desired page
-                    window.location.href = "cards/speed"; // replace with your URL
+                    window.location.href = "{% url 'speed' %}";  
                 } else {
                     alert("Please fill in all fields before continuing.");
                 }

@@ -228,24 +228,38 @@
             </div>
         </div>
         
-        <!-- Main Content -->
         <div class="content">
-            <!-- Add User Form -->
+            <!-- Add Card Form -->
             <div class="user-form">
-                <label class="form-label">enter the card name</label>
-                <input type="text" class="form-input">
-                <button class="add-btn">add</button>
+                <label class="form-label">Enter the card name</label>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="card_name" class="form-input" required>
+                    <button type="submit" name="add_card" class="add-btn">Add</button>
+                </form>
             </div>
-            
-            <!-- Delete User Form -->
+        
+            <!-- Delete Card Form -->
             <div class="user-form">
-                <label class="form-label">enter the card name</label>
-                <select class="dropdown-input">
-                    <option value="" disabled selected></option>
-                </select>
-                <button class="delete-btn">delete</button>
+                <label class="form-label">Select a card to delete</label>
+                <form method="POST">
+                    {% csrf_token %}
+                    <select name="card_id" class="dropdown-input" required>
+                        <option value="" disabled selected>Select a card</option>
+                        {% for card in cards %}
+                            <option value="{{ card.id }}">{{ card.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" name="delete_card" class="delete-btn">Delete</button>
+                </form>
             </div>
+        
+            <!-- Display success or error message -->
+            {% if message %}
+                <p style="color: {{ message_color }}; margin-top: 10px;">
+                    {{ message }}
+                </p>
+            {% endif %}
         </div>
-    </div>
 </body>
 </html>

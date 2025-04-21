@@ -86,12 +86,20 @@
         }
 
         .profile-btn {
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+            position: absolute;
+            top: 30px;
+            right: 160px;
+            width: 24px;
+            height: 24px;
+            margin-right: 0;
+          }
+          
+          .profile-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+
 
         .logout-btn {
             padding: 8px 16px;
@@ -117,11 +125,14 @@
         /* Navigation tabs */
         .nav-tabs {
             display: flex;
+            background-color: #ffc166;
+            color: #000;
             justify-content: space-between;
             padding: 15px 20px;
             gap: 15px;
             background-color: #f9f9f9;
         }
+
 
         .nav-tab {
             padding: 10px 25px;
@@ -134,6 +145,11 @@
             border: 1px solid #e7b05b;
             flex: 1;
             max-width: 200px;
+        }
+
+        .nav-tab:hover {
+            text-decoration: underline; 
+            color:rgb(7, 5, 2);;      
         }
 
         /* Main content area */
@@ -149,28 +165,6 @@
             padding: 20px;
             border-radius: 5px;
             margin-right: 20px;
-        }
-
-        .toggle-wrapper {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            background-color: #e9e9e9;
-            border-radius: 15px;
-            padding: 3px;
-        }
-
-        .toggle-btn {
-            padding: 5px 10px;
-            border-radius: 15px;
-            margin: 0;
-            border: none;
-            background: none;
-        }
-
-        .toggle-btn.active {
-            background-color: #2196F3;
-            color: white;
         }
 
         .sidebar-menu {
@@ -216,28 +210,28 @@
             flex-grow: 1;
         }
 
-        .search-panel {
-            background-color: white;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .search-panel-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .search-close-btn {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
+        .menu {
+            display: flex;
+            gap: 130px; /* spacing between items */
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+          }
+          
+          .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+          }
+          
+          .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+          }
 
         .action-buttons {
             display: flex;
@@ -257,6 +251,10 @@
             cursor: pointer;
             text-align: center;
         }
+
+        .sidebar-link {
+            display: flex;
+        }
     </style>
 </head>
 <body>
@@ -268,14 +266,27 @@
                 <span class="header-title">Admin dashboard</span>
             </div>
             
-            <div class="search-bar">
-                <span class="hamburger-icon">☰</span>
-                <input type="text" class="search-input" placeholder="Hinted search text">
-                <span class="search-icon">🔍</span>
-            </div>
-            
+            <div class="menu">
+                <div class="menu-item">
+                    <img src="{% static 'myapp/vote-icon.png' %}" alt="vote-icon">
+                  <span>vote</span>
+                </div>
+                <div class="menu-item">
+                    <img src="{% static 'myapp/team.png' %}" alt="team summary">
+                  <span>team summary</span>
+                </div>
+                {% comment %} <div class="menu-item">
+                    <img src="{% static 'myapp/user-icon.png' %}" alt="user-icon">
+                  <span>username</span>
+                </div> {% endcomment %}
+              </div>
+
+
             <div class="user-controls">
-                <div class="profile-btn"></div>
+                <div class="profile-btn">
+                    <img src="{% static 'myapp/user-icon.png' %}" alt="Username Icon">
+                    <span>user</span>
+                </div>
                 <button class="logout-btn">logout</button>
                 <button class="settings-btn">⚙️</button>
             </div>
@@ -294,29 +305,30 @@
         <div class="content">
             <!-- Sidebar -->
             <div class="sidebar">
-                <div class="toggle-wrapper">
-                    <button class="toggle-btn active">•</button>
-                    <button class="toggle-btn">•</button>
-                </div>
                 
                 <ul class="sidebar-menu">
                     <li class="sidebar-item">
+                        <a href="{% url 'view_departments' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Departments</span>
                     </li>
                     <li class="sidebar-item">
+                        <a href="{% url 'view_teams' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Teams</span>
                     </li>
                     <li class="sidebar-item">
+                        <a href="{% url 'view_sessions' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>session</span>
                     </li>
                     <li class="sidebar-item">
+                        <a href="{% url 'view_users' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Users</span>
                     </li>
                     <li class="sidebar-item">
+                        <a href="{% url 'view_cards' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Cards</span>
                     </li>
@@ -325,11 +337,6 @@
             
             <!-- Main Panel -->
             <div class="main-panel">
-                <div class="search-panel">
-                    <input type="text" class="search-panel-input" placeholder="">
-                    <span class="search-close-btn">✕</span>
-                </div>
-                
                 <div class="action-buttons">
                   <a href="{% url 'team_management' %}" class="action-btn">Manage Teams</a>
                   <a href="{% url 'department_management' %}" class="action-btn">manage departments</a>

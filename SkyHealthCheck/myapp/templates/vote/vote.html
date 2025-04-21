@@ -1,0 +1,321 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Vote</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo {
+            height: 25px;
+            display: block;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 5px;
+            color: #333;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 15px;
+            width: 200px;
+        }
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+        }
+        .search-bar i {
+            color: #777;
+            font-size: 14px;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .vote-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .profile-btn {
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .logout-btn {
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .settings-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .nav-btn {
+            background-color: #ffd180;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        /* Updated styles for the content below navbar */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .session-selector {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .session-dropdown {
+            width: 250px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            text-align: left;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .dropdown-arrow {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .voting-area {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .vertical-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #333;
+        }
+        
+        .vote-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .vote-label {
+            width: 48%;
+            text-align: right;
+            padding-right: 25px;
+            font-size: 14px;
+        }
+        
+        .vote-bar {
+            width: 48%;
+            height: 40px;
+            background-color: #ddd;
+            margin-left: 25px;
+        }
+        
+        .vote-marker {
+            position: absolute;
+            left: 50%;
+            width: 10px;
+            height: 2px;
+            background-color: #333;
+            transform: translateX(-50%);
+        }
+        
+        .support-card {
+            position: relative;
+        }
+        
+        .support-outline {
+            position: absolute;
+            left: 0;
+            top: -10px;
+            width: 45%;
+            height: 60px;
+            border: 1px dashed #777;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .support-text {
+            font-size: 14px;
+        }
+        
+        .instructions {
+            position: absolute;
+            left: 0;
+            top: 60px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            {% load static %}
+            <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo" class="logo">
+            <span class="logo-text">Vote</span>
+        </div>
+        <div class="search-bar">
+            <i>🔍</i>
+            <input type="text" placeholder="Hinted search text">
+        </div>
+        <div class="header-actions">
+            <button class="vote-btn">vote</button>
+            <button class="profile-btn">P</button>
+            <button class="logout-btn">logout</button>
+            <button class="settings-btn">⚙️</button>
+        </div>
+    </div>
+    
+    <div class="nav-buttons">
+        <button class="nav-btn">Home</button>
+        <button class="nav-btn">Health-Check</button>
+        <button class="nav-btn">Agreements</button>
+        <button class="nav-btn">Admin</button>
+        <button class="nav-btn">Overview</button>
+    </div>
+    
+    <div class="content-container">
+        <div class="session-selector">
+            <p>choose a session</p>
+            <div class="session-dropdown">
+                <span class="dropdown-arrow">▼</span>
+            </div>
+        </div>
+        
+        <div class="voting-area">
+            <div class="vertical-line"></div>
+            
+            <div class="vote-item">
+                <div class="vote-label">Teamwork</div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+            </div>
+            
+            <div class="vote-item support-card">
+                <div class="support-outline">
+                    <span class="support-text">support</span>
+                </div>
+                <div class="vote-label"></div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+                <div class="instructions">
+                    click on the card<br>
+                    to view/change<br>
+                    vote
+                </div>
+            </div>
+            
+            <div class="vote-item">
+                <div class="vote-label">Speed</div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+            </div>
+            
+            <div class="vote-item">
+                <div class="vote-label">Mission</div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+            </div>
+            
+            <div class="vote-item">
+                <div class="vote-label">Learning</div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+            </div>
+            
+            <div class="vote-item">
+                <div class="vote-label">Delivering Value</div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+            </div>
+            
+            <div class="vote-item">
+                <div class="vote-label">Easy to release</div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+            </div>
+            
+            <div class="vote-item">
+                <div class="vote-label">Fun</div>
+                <div class="vote-marker"></div>
+                <div class="vote-bar"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

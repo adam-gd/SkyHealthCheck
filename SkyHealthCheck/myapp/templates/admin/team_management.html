@@ -49,41 +49,48 @@
             color: #333;
         }
 
-        .search-bar {
-            flex-grow: 1;
-            max-width: 400px;
-            margin: 0 20px;
-            position: relative;
-        }
+        .menu {
+            display: flex;
+            gap: 130px; /* spacing between items */
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+          }
+          
+          .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+          }
+          
+          .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+          }
 
-        .search-input {
-            width: 100%;
-            padding: 8px 15px 8px 40px;
-            border-radius: 20px;
-            border: none;
-            background-color: #f0e6f6;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #333;
-        }
-
-        .user-controls {
+          .user-controls {
             display: flex;
             align-items: center;
         }
 
         .profile-btn {
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+            position: absolute;
+            top: 35px;
+            right: 160px;
+            width: 24px;
+            height: 24px;
+            margin-right: 0;
+          }
+          
+          .profile-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
 
         .logout-btn {
             padding: 8px 16px;
@@ -122,10 +129,16 @@
             padding: 10px 25px;
             background-color: #ffc166;
             border-radius: 5px;
+            text-decoration: none; 
+            color: #000;        
             text-align: center;
             cursor: pointer;
             font-weight: 500;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .nav-tab:hover {
+            text-decoration: underline; 
+            color:rgb(7, 5, 2);;      
         }
 
         /* User management content */
@@ -140,18 +153,22 @@
         .user-form {
             display: flex;
             flex-direction: column;
+            text-align: center;
             align-items: center;
             width: 100%;
             max-width: 500px;
+            
         }
 
         .form-label {
             align-self: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
             font-size: 16px;
             color: #333;
-        }
 
+        }
+        
+        
         .form-input {
             width: 100%;
             padding: 12px;
@@ -205,13 +222,26 @@
                 <span class="header-title">team management</span>
             </div>
             
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Hinted search text">
-                <div class="search-icon">🔍</div>
-            </div>
+            <div class="menu">
+                <div class="menu-item">
+                    <img src="{% static 'myapp/vote-icon.png' %}" alt="vote-icon">
+                  <span>vote</span>
+                </div>
+                <div class="menu-item">
+                    <img src="{% static 'myapp/team.png' %}" alt="team summary">
+                  <span>team summary</span>
+                </div>
+                {% comment %} <div class="menu-item">
+                    <img src="{% static 'myapp/user-icon.png' %}" alt="user-icon">
+                  <span>username</span>
+                </div> {% endcomment %}
+              </div>
             
             <div class="user-controls">
-                <div class="profile-btn"></div>
+                <div class="profile-btn">
+                    <img src="{% static 'myapp/user-icon.png' %}" alt="Username Icon">
+                    <span>user</span>
+                </div>
                 <button class="logout-btn">logout</button>
                 <button class="settings-btn">⚙️</button>
             </div>
@@ -223,28 +253,62 @@
                 <div class="nav-tab">Home</div>
                 <div class="nav-tab">Health-Check</div>
                 <div class="nav-tab">Agreements</div>
-                <div class="nav-tab">Admin</div>
+                <a href="{% url 'admin_dashboard' %}" class="nav-tab">Admin dashboard</a>
                 <div class="nav-tab">Overview</div>
             </div>
         </div>
         
-        <!-- Main Content -->
         <div class="content">
             <!-- Add User Form -->
-            <div class="user-form">
-                <label class="form-label">enter the team name</label>
-                <input type="text" class="form-input">
-                <button class="add-btn">add</button>
-            </div>
-            
-            <!-- Delete User Form -->
-            <div class="user-form">
-                <label class="form-label">enter the team name</label>
-                <select class="dropdown-input">
-                    <option value="" disabled selected></option>
-                </select>
-                <button class="delete-btn">delete</button>
-            </div>
+        <!-- Add Team Form -->
+<div class="user-form">
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add">
+
+        <label class="form-label">Select Department</label>
+        <select name="department_id" class="dropdown-input" required>
+            <option value="" disabled selected>Select department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label class="form-label">Enter the team name</label>
+        <input type="text" name="team_name" class="form-input" required>
+
+        <button type="submit" class="add-btn">Add Team</button>
+    </form>
+</div>
+
+<!-- Delete Team Form -->
+<div class="user-form">
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="delete">
+
+        <label class="form-label">Select a team to delete</label>
+        <select name="team_id" class="dropdown-input" required>
+            <option value="" disabled selected>Select team</option>
+            {% for team in teams %}
+                <option value="{{ team.id }}">{{ team.name }} ({{ team.department.name }})</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="delete-btn">Delete Team</button>
+    </form>
+        </div>
+
+      <!-- Display Django messages -->
+         {% if messages %}
+        <div style="margin-top: 20px; text-align: center;">
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% else %}black{% endif %}; font-weight: bold;">
+                {{ message }}
+            </p>
+        {% endfor %}
+         </div>
+         {% endif %}
         </div>
     </div>
 </body>

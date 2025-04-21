@@ -230,22 +230,36 @@
         
         <!-- Main Content -->
         <div class="content">
-            <!-- Add User Form -->
+            <!-- Add Department Form -->
             <div class="user-form">
-                <label class="form-label">enter the department name</label>
-                <input type="text" class="form-input">
-                <button class="add-btn">add</button>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label class="form-label">Enter the department name</label>
+                    <input type="text" name="department_name" class="form-input" required>
+                    <button type="submit" name="action" value="add" class="add-btn">Add</button>
+                </form>
             </div>
-            
-            <!-- Delete User Form -->
-            <div class="user-form">
-                <label class="form-label">enter the department name</label>
-                <select class="dropdown-input">
-                    <option value="" disabled selected></option>
-                </select>
-                <button class="delete-btn">delete</button>
+        
+            <!-- Delete Department Form -->
+            <div class="user-form" style="margin-top: 20px;">
+                <form method="POST">
+                    {% csrf_token %}
+                    <label class="form-label">Enter the department name</label>
+                    <select name="delete_department_id" class="dropdown-input" required>
+                        <option value="" disabled selected>Select department</option>
+                        {% for dept in departments %}
+                            <option value="{{ dept.id }}">{{ dept.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" name="action" value="delete" class="delete-btn">Delete</button>
+                </form>
             </div>
+        
+            {% if message %}
+                <p style="margin-top: 10px; color: {{ message_color }};">{{ message }}</p>
+            {% endif %}
         </div>
+        
     </div>
 </body>
 </html>
