@@ -1,0 +1,52 @@
+{% extends "base/login_base.html" %}
+{% load static %}
+
+{% block title %}Sky – Admin Create an Account{% endblock %}
+
+{% block header %}Admin Sign Up{% endblock %}
+
+{% block signup_tab_active %}active{% endblock %}
+
+{% block form %}
+<div class="signup-container">
+    <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo" class="logo">
+    <h1>Create Admin Account</h1>
+    
+    <img src="{% static 'myapp/Login_char.png' %}" alt="Admin Icon" class="central-icon">
+    
+    <div class="tab-container">
+        <button class="tab-button">Login</button>
+        <button class="tab-button active">Signup</button>
+    </div>
+    
+    <form method="POST" action="{% url 'admin_signup' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control required-field" placeholder="First Name *" name="first_name" required>
+        </div>
+        
+        <div class="form-group">
+            <input type="text" class="form-control required-field" placeholder="Surname *" name="last_name" required>
+        </div>
+        
+        <div class="form-group">
+            <input type="email" class="form-control required-field" placeholder="Email Address *" name="email" required>
+        </div>
+        
+        <div class="form-group password-container">
+            <input type="password" class="form-control required-field" placeholder="Password *" name="password" required>
+            <svg class="info-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2"/>
+                <path d="M12 7V12" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="16" r="1" fill="black"/>
+            </svg>
+        </div>
+        
+        <div class="form-group">
+            <input type="password" class="form-control required-field" placeholder="Confirm Password *" name="confirm_password" required>
+        </div>
+        
+        <button type="submit" class="submit-button">Create Admin Account</button>
+    </form>
+</div>
+{% endblock %}

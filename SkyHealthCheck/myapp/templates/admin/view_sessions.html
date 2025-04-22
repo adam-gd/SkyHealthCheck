@@ -54,8 +54,8 @@
             <tbody>
                 {% for session in sessions %}
                     <tr>
-                        <td>{{ session.title }}</td>
-                        <td>{{ session.date }}</td>
+                        <td>{{ session.name }}</td>
+                        <td>{{ session.created_at }}</td>
                         <td>
                             {% if session.created_by %}
                                 {{ session.created_by.username }}

@@ -232,7 +232,7 @@
         <div class="content">
             <!-- Add Session Form -->
             <div class="user-form">
-                <form method="POST">
+                <form method="POST" action="{% url 'session_management' %}">
                     {% csrf_token %}
                     <label class="form-label">Enter the session name</label>
                     <input type="text" name="session_name" class="form-input" required>
@@ -242,7 +242,7 @@
             
             <!-- Delete Session Form -->
             <div class="user-form" style="margin-top: 20px;">
-                <form method="POST">
+                <form method="POST" action="{% url 'session_management' %}">
                     {% csrf_token %}
                     <label class="form-label">Select the session to delete</label>
                     <select name="delete_session_id" class="dropdown-input" required>

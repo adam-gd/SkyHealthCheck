@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
+
+
 
 # Create your models here.
 # myapp/models.py
@@ -29,6 +32,8 @@ class Session(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(default=timezone.now)
     end_date = models.DateField(default=timezone.now)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name

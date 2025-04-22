@@ -3,9 +3,13 @@ from . import views
 from .views import register_view
 
 urlpatterns = [
-    path('login/', views.login_page, name='login'),
+    path('login/', views.login_view, name='login'),
+    path('admin_login/', views.admin_login_view, name='admin_login'),
+    path('admin/', views.admin_dashboard_view, name='admin_dashboard'),
+    path('admin_signup/', views.admin_signup_view, name='admin_signup'),
+    path('engineer_login/', views.engineer_login_view, name='engineer_login'),
     path('register/', register_view, name='register'),
-    path('signup/', views.signup_view, name='signup'),
+    path('engineer_signup/', views.engineer_signup_view, name='engineer_signup'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('delivering_value/', views.delivering_value_view, name='delivering_value'),
     path('easy_to_release/', views.easy_to_release_view, name='easy_to_release'),

@@ -8,6 +8,7 @@ from django.http import Http404
 from .models import CustomUser, Department, Team, HealthCard, Session, Card
 from django.utils import timezone
 
+
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -27,19 +28,15 @@ def register_view(request):
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
 
-def login_page(request):
-    return render(request, 'myapp/login.html')
+def login_view(request):
+    return render(request, 'registration/login.html')
 
-def signup_view(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('dashboard')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+def engineer_login_view(request):
+    return render(request, 'engineer/engineer_login.html')
+
+def engineer_signup_view(request):
+    return render(request, 'engineer/engineer_signup.html')
+  
 
 @login_required
 def dashboard_view(request):
@@ -106,9 +103,31 @@ def team_leader_view(request):
 def department_leader_view(request):
     return render(request, 'department_leader.html')
 
-def admin_login_view(request):
-    return render(request, 'admin_login.html')
 
+
+def admin_login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None and user.is_staff:
+            login(request, user)
+            return redirect('admin_dashboard.html')  # Redirect to your custom admin dashboard
+        else:
+            messages.error(request, 'Invalid credentials or insufficient permissions.')
+            return redirect('admin_login')
+        
+    return render(request, 'admin/admin_login.html')
+
+
+def admin_signup_view(request):
+    return render(request, 'admin/admin_signup.html')
+
+
+@login_required
 def admin_dashboard_view(request):
     return render(request, 'admin/admin_dashboard.html')
 
@@ -173,36 +192,41 @@ def team_management_view(request):
     })
 
 
+@login_required
 def session_management_view(request):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')  # or whatever your login URL is
+    
     message = ''
-    message_color = 'green'  
+    message_color = 'green'
+
     if request.method == 'POST':
         action = request.POST.get('action')
 
-        # Add session
         if action == 'add':
             session_name = request.POST.get('session_name')
             if session_name:
-                start_date = timezone.now() 
-                end_date = timezone.now() + timezone.timedelta(hours=1)
-                Session.objects.create(name=session_name)
+                Session.objects.create(
+                    name=session_name,
+                    created_by=request.user
+                )
                 message = f"Session '{session_name}' added successfully!"
-                message_color = 'green'
+            else:
+                message = "Please enter a session name."
+                message_color = 'red'
 
-        # Delete session
         elif action == 'delete':
             session_id = request.POST.get('delete_session_id')
             if session_id:
                 try:
-                    session = Session.objects.get(id=session_id)
-                    session.delete()
-                    message = f"Session '{session.name}' deleted successfully!"
+                    sess = Session.objects.get(id=session_id)
+                    sess.delete()
+                    message = f"Session '{sess.name}' deleted."
                     message_color = 'red'
                 except Session.DoesNotExist:
                     message = "Session not found."
                     message_color = 'red'
 
-    # Fetch all sessions to display in the dropdown
     sessions = Session.objects.all()
     return render(request, 'admin/session_management.html', {
         'message': message,
@@ -299,6 +323,9 @@ def view_cards(request):
     return render(request, 'admin/view_cards.html', {'cards': cards})
 
 
+@login_required
 def view_sessions(request):
     sessions = Session.objects.select_related('created_by').all()
-    return render(request, 'admin/view_sessions.html', {'sessions': sessions})
+    return render(request, 'admin/view_sessions.html', {
+        'sessions': sessions
+    })

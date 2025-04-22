@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky - Create an account</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .signup-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            padding: 30px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .logo {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .central-icon {
+            width: 100px;
+            margin: 20px auto;
+        }
+        
+        .tab-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .tab-button {
+            flex: 1;
+            padding: 12px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: transparent;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: #ffb7b7;
+            border-color: #ff9999;
+        }
+        
+        .tab-button:not(.active) {
+            background-color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: #ff0000;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .info-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .submit-button {
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .submit-button:hover {
+            background-color: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo" class="logo">
+        <h1>Create an account</h1>
+        
+        <img src="{% static 'myapp/Login_char.png' %}" alt="User Icon" class="central-icon">
+        
+        <div class="tab-container">
+            <button class="tab-button active">Login</button>
+            <button class="tab-button">Signup</button>
+        </div>
+        
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control required-field" placeholder="First Name *" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control required-field" placeholder="Surname *" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" class="form-control required-field" placeholder="Email Address *" required>
+            </div>
+            
+            <div class="form-group password-container">
+                <input type="password" class="form-control required-field" placeholder="Password *" required>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2"/>
+                    <path d="M12 7V12" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="16" r="1" fill="black"/>
+                </svg>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" class="form-control required-field" placeholder="Confirm Password *" required>
+            </div>
+            
+            <button type="submit" class="submit-button">Create Account</button>
+        </form>
+    </div>
+</body>
+</html>

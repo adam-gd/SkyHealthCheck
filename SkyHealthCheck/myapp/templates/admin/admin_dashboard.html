@@ -49,35 +49,26 @@
             color: #333;
         }
 
-        .search-bar {
-            flex-grow: 1;
-            max-width: 400px;
-            margin: 0 20px;
-            position: relative;
+        .menu {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            margin-right: 20px;
         }
-
-        .search-input {
-            width: 100%;
-            padding: 8px 15px 8px 40px;
-            border-radius: 20px;
-            border: none;
-            background-color: #f0e6f6;
+          
+        .menu-item {
+            display: flex;
+            align-items: center;
+            color: #000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            margin-right: 20px;
         }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #333;
-        }
-
-        .hamburger-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
+          
+        .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
         }
 
         .user-controls {
@@ -86,20 +77,16 @@
         }
 
         .profile-btn {
-            position: absolute;
-            top: 30px;
-            right: 160px;
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+          
+        .profile-btn img {
             width: 24px;
             height: 24px;
-            margin-right: 0;
-          }
-          
-          .profile-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
-
+            margin-right: 8px;
+        }
 
         .logout-btn {
             padding: 8px 16px;
@@ -108,6 +95,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-right: 10px;
         }
 
         .settings-btn {
@@ -119,20 +107,19 @@
             background: none;
             border: none;
             cursor: pointer;
-            margin-left: 10px;
         }
 
         /* Navigation tabs */
         .nav-tabs {
             display: flex;
-            background-color: #ffc166;
-            color: #000;
+            background-color: white;
             justify-content: space-between;
-            padding: 15px 20px;
+            padding: 20px;
             gap: 15px;
-            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-
 
         .nav-tab {
             padding: 10px 25px;
@@ -141,35 +128,33 @@
             text-align: center;
             cursor: pointer;
             font-weight: 500;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid #e7b05b;
+            text-decoration: none;
+            color: black;
             flex: 1;
-            max-width: 200px;
         }
 
         .nav-tab:hover {
-            text-decoration: underline; 
-            color:rgb(7, 5, 2);;      
+            text-decoration: underline;      
         }
 
         /* Main content area */
         .content {
             display: flex;
-            padding: 20px;
+            padding: 0 20px 20px 20px;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 300px;
+            width: 250px;
             background-color: white;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
             margin-right: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .sidebar-menu {
             list-style: none;
-            margin-top: 20px;
         }
 
         .sidebar-item {
@@ -181,79 +166,57 @@
         }
 
         .sidebar-checkbox {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #2196F3;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #2196F3;
             margin-right: 15px;
             position: relative;
-            border-radius: 2px;
+            border-radius: 4px;
         }
 
-        /* Make first item active */
-        .sidebar-item:first-child .sidebar-checkbox {
-            background-color: #2196F3;
-        }
-
-        .sidebar-item:first-child .sidebar-checkbox:after {
-            content: "";
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            width: 100%;
         }
 
         /* Main panel */
         .main-panel {
             flex-grow: 1;
-        }
-
-        .menu {
-            display: flex;
-            gap: 130px; /* spacing between items */
-            align-items: center;
-            padding: 10px;
-            background-color: #f8f8f8;
-          }
-          
-          .menu-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #000;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-          }
-          
-          .menu-item img {
-            width: 24px;
-            height: 24px;
-            margin-bottom: 4px;
-          }
+            justify-content: center;
+        }
 
         .action-buttons {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            width: 50%;
+            padding-top: 60px;
         }
 
         .action-btn {
-            width: 40%;
-            padding: 12px;
+            width: 60%;
+            padding: 15px;
             background-color: #ff9800;
             color: white;
             border: none;
             border-radius: 25px;
-            font-weight: bold;
+            font-weight: normal;
             cursor: pointer;
             text-align: center;
+            text-decoration: none;
+            font-size: 16px;
         }
-
-        .sidebar-link {
-            display: flex;
+        
+        /* Add a new action button for settings */
+        .action-btn:last-child {
+            background-color: #ff9800;
         }
     </style>
 </head>
@@ -269,18 +232,18 @@
             <div class="menu">
                 <div class="menu-item">
                     <img src="{% static 'myapp/vote-icon.png' %}" alt="vote-icon">
-                  <span>vote</span>
+                    <span>vote</span>
                 </div>
                 <div class="menu-item">
                     <img src="{% static 'myapp/team.png' %}" alt="team summary">
-                  <span>team summary</span>
+                    <span>team summary</span>
                 </div>
-
+            </div>
 
             <div class="user-controls">
                 <div class="profile-btn">
                     <img src="{% static 'myapp/user-icon.png' %}" alt="Username Icon">
-                    <span>user</span>
+                    <span>username</span>
                 </div>
                 <button class="logout-btn">logout</button>
                 <button class="settings-btn">⚙️</button>
@@ -300,32 +263,36 @@
         <div class="content">
             <!-- Sidebar -->
             <div class="sidebar">
-                
                 <ul class="sidebar-menu">
                     <li class="sidebar-item">
                         <a href="{% url 'view_departments' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Departments</span>
+                        </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{% url 'view_teams' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Teams</span>
+                        </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{% url 'view_sessions' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
-                        <span>session</span>
+                        <span>Sessions</span>
+                        </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{% url 'view_users' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Users</span>
+                        </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{% url 'view_cards' %}" class="sidebar-link">
                         <div class="sidebar-checkbox"></div>
                         <span>Cards</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -333,15 +300,11 @@
             <!-- Main Panel -->
             <div class="main-panel">
                 <div class="action-buttons">
-                  <a href="{% url 'team_management' %}" class="action-btn">Manage Teams</a>
+                  <a href="{% url 'team_management' %}" class="action-btn">manage teams</a>
                   <a href="{% url 'department_management' %}" class="action-btn">manage departments</a>
-                  
                   <a href="{% url 'user_management' %}" class="action-btn">manage users</a>
-                 
                   <a href="{% url 'card_management' %}" class="action-btn">manage Cards</a>
-                  
-                  <a href="{% url 'session_management' %}" class="action-btn">manage Sessions</a>
-                  
+                  <a href="{% url 'session_management' %}" class="action-btn">manage Session</a>
                 </div>
             </div>
         </div>
