@@ -1,0 +1,48 @@
+{% extends "base/login_base.html" %}
+{% load static %}
+
+{% block title %}Sky – Engineer Login{% endblock %}
+
+{% block header %}Engineer Sign‑in{% endblock %}
+
+{% block login_tab_active %}active{% endblock %}
+
+{% block form %}
+  <form method="post" action="{% url 'engineer_login' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <input name="username" type="text" class="form-control" placeholder="Username" required>
+    </div>
+    <div class="form-group password-container">
+      <svg class="password-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2"/>
+        <path d="M12 7V12" stroke="black" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="16" r="1" fill="black"/>
+      </svg>
+      <input name="password" type="password" class="form-control" placeholder="Password" required>
+    </div>
+    <div class="forgot-password">
+      <a href="#">Forgot password?</a>
+    </div>
+  </form>
+
+  <!-- Redirect Button -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'engineer_signup' %}" class="sign-up-button" style="
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      background-color: #ffcc00;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    ">
+      Sign Up
+    </a>
+  </div>
+{% endblock %}

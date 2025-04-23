@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7; /* optional - for overlay effect */
+        }
+        
+
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 30px;
+        }
+
+        .logo {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #000;
+            margin: 20px 0 30px;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .icon-container {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .central-icon {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .login-options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .login-row {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .login-btn {
+            padding: 15px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 300px;
+            text-align: center;
+            color: #333;
+        }
+
+        .login-btn.pink {
+            background-color: #ffcccb;
+            border-color: #ffcccb;
+        }
+
+        .login-btn.white {
+            background-color: white;
+            border-color: #333;
+        }
+
+        .admin-container {
+            margin-top: 30px;
+        }
+
+        .admin-btn {
+            padding: 15px 10px;
+            border-radius: 8px;
+            background-color: #ffcccb;
+            border-color: #ffcccb;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 200px;
+            text-align: center;
+            color: #333;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="{% static 'myapp/background_vid.mp4' %}" type="video/mp4">
+        
+    </video>
+    
+    <!-- Sky Logo in top-left -->
+    <div class="top-bar">
+        <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo" class="logo">
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <h1>Login page</h1>
+
+        <!-- Central icon -->
+        <div class="icon-container">
+            <img src="{% static 'myapp/Login_char.png' %}" alt="User Icon" class="central-icon">
+        </div>
+
+        <!-- Login options -->
+        <div class="login-options">
+            <div class="login-row">
+                <a href="{% url 'senior_manager' %}" class="login-btn pink">Senior managers</a>
+                <a href="{% url 'engineer_login' %}" class="login-btn white">Engineers login</a>
+            </div>
+            <div class="login-row">
+                <a href="{% url 'team_leader' %}" class="login-btn pink">Team Leaders login</a>
+                <a href="{% url 'department_leader' %}" class="login-btn white">Department Leaders login</a>
+            </div>
+        </div>
+
+        <!-- Admin login -->
+        <div class="admin-container">
+            <a href="{% url 'admin_login' %}" class="admin-btn">Admin login</a>
+        </div>
+    </div>
+</body>
+</html>

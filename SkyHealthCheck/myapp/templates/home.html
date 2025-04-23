@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to right, #f9a86f, #e66465, #9198e5);
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 30px;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #222;
+            margin-left: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 8px 15px;
+            width: 300px;
+        }
+        
+        .search-bar input {
+            border: none;
+            background: transparent;
+            flex-grow: 1;
+            padding: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .logout-btn {
+            background-color: #222;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .settings-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .nav-menu {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+        }
+        
+        .nav-button {
+            background-color: #ffc04d;
+            border: 2px solid #222;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .main-content {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: linear-gradient(to right, rgba(255, 192, 203, 0.7), rgba(173, 216, 230, 0.7));
+            border-radius: 10px;
+            border: 2px solid #9370DB;
+        }
+        
+        .welcome-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .company-description {
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            max-width: 900px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        
+        .question-prompt {
+            color: #6a0dad;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .question-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        textarea {
+            flex-grow: 1;
+            padding: 10px;
+            min-height: 70px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+        
+        .submit-btn {
+            background-color: #ffc04d;
+            border: 1px solid #222;
+            border-radius: 5px;
+            padding: 5px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            height: 40px;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <svg width="50" height="30" viewBox="0 0 50 30">
+                <path d="M10,5 L40,5 L25,25 Z" fill="#ff1493" />
+                <path d="M15,5 L35,5 L25,20 Z" fill="#00bfff" />
+            </svg>
+            <div class="logo-text">HOME</div>
+        </div>
+        
+        <div class="search-bar">
+            <span>≡</span>
+            <input type="text" placeholder="Hinted search text">
+            <button>🔍</button>
+        </div>
+        
+        <div class="user-actions">
+            <div class="profile-btn">Profile</div>
+            <div class="logout-btn">logout</div>
+            <button class="settings-btn">⚙️</button>
+        </div>
+    </header>
+    
+    <nav class="nav-menu">
+        <button class="nav-button">Home</button>
+        <button class="nav-button">Health-Check</button>
+        <button class="nav-button">Agreements</button>
+        <button class="nav-button">Admin</button>
+        <button class="nav-button">Overview</button>
+    </nav>
+    
+    <main class="main-content">
+        <h1 class="welcome-title">WELCOME TO OUR WEBSITE!</h1>
+        <p class="company-description">
+            Sky is a leading telecommunications and media company based in the UK, known for providing a wide range of services, including television, broadband, and mobile services. With a strong focus on innovation, Sky offers high-quality entertainment content through satellite and streaming platforms, including exclusive sports programming and original TV shows. The company is recognized for its customer-centric approach, aiming to deliver seamless digital experiences and cutting-edge technology to enhance the way people connect and consume media. Sky is also committed to sustainability, with various initiatives aimed at reducing its environmental footprint.
+        </p>
+    </main>
+    
+    <footer class="footer">
+        <p class="question-prompt">ASK US QUESTIONS HERE</p>
+        <div class="question-input">
+            <textarea></textarea>
+            <button class="submit-btn">SUBMIT</button>
+        </div>
+    </footer>
+</body>
+</html>

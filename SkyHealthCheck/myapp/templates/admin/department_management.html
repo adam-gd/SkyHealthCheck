@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky department Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 15px 8px 40px;
+            border-radius: 20px;
+            border: none;
+            background-color: #f0e6f6;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+        }
+
+        .user-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-btn {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background-color: #111;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .settings-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Navigation tabs */
+        .nav-container {
+            padding: 20px;
+            background-color: #f3f3f3;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+        }
+
+        .nav-tab {
+            padding: 10px 25px;
+            background-color: #ffc166;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* User management content */
+        .content {
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 100px;
+        }
+
+        .user-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-label {
+            align-self: flex-start;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+        }
+
+        .add-btn {
+            padding: 10px 30px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            padding: 10px 30px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-container">
+                <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo" class="logo">
+                <span class="header-title">department management</span>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Hinted search text">
+                <div class="search-icon">🔍</div>
+            </div>
+            
+            <div class="user-controls">
+                <div class="profile-btn"></div>
+                <button class="logout-btn">logout</button>
+                <button class="settings-btn">⚙️</button>
+            </div>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <div class="nav-tab">Home</div>
+                <div class="nav-tab">Health-Check</div>
+                <div class="nav-tab">Agreements</div>
+                <div class="nav-tab">Admin</div>
+                <div class="nav-tab">Overview</div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Add Department Form -->
+            <div class="user-form">
+                <form method="POST">
+                    {% csrf_token %}
+                    <label class="form-label">Enter the department name</label>
+                    <input type="text" name="department_name" class="form-input" required>
+                    <button type="submit" name="action" value="add" class="add-btn">Add</button>
+                </form>
+            </div>
+        
+            <!-- Delete Department Form -->
+            <div class="user-form" style="margin-top: 20px;">
+                <form method="POST">
+                    {% csrf_token %}
+                    <label class="form-label">Enter the department name</label>
+                    <select name="delete_department_id" class="dropdown-input" required>
+                        <option value="" disabled selected>Select department</option>
+                        {% for dept in departments %}
+                            <option value="{{ dept.id }}">{{ dept.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" name="action" value="delete" class="delete-btn">Delete</button>
+                </form>
+            </div>
+        
+            {% if message %}
+                <p style="margin-top: 10px; color: {{ message_color }};">{{ message }}</p>
+            {% endif %}
+        </div>
+        
+    </div>
+</body>
+</html>
