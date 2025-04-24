@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sky Signup</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 100px;
+    }
+
+    .gear {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .container {
+      text-align: center;
+      width: 360px;
+      background-color: white;
+      border: 2px solid black;
+      border-radius: 15px;
+      padding: 40px 30px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 10px 20px;
+      border: 1px solid #000;
+      cursor: pointer;
+      background-color: white;
+      border-radius: 10px;
+      margin: 0 5px;
+      font-weight: bold;
+    }
+
+    .tabs .active {
+      background-color: #f9b7b7;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input::placeholder {
+      color: #555;
+    }
+
+    .required::after {
+      content: " *";
+      color: red;
+    }
+
+    .password-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .password-container input {
+      padding-right: 60px;
+    }
+
+    .info-icon {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+    }
+
+    .info-icon:hover::after {
+      content: "Password must contain at least 6 characters, 1 capital letter, and 1 symbol.";
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+      font-size: 12px;
+      z-index: 1;
+    }
+
+    .sign-in-button {
+      background-color: #ffc107;
+      color: #000;
+      padding: 10px;
+      border: none;
+      border-radius: 12px;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <img src="{% static 'img/Sky_Group_logo_2020.svg.webp' %}" alt="sky logo" class="logo" width="50" />
+
+  <div class="container">
+    <h1>Create an account</h1>
+    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="illustration" width="80" />
+
+    <div class="tabs">
+      <a href="{% url 'login' %}"><button>Login</button></a>
+      <button class="active">Signup</button>
+    </div>
+
+    {% if form.errors %}
+      <div style="color: red;">
+        {% for field in form %}
+          {% for error in field.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+      <input type="text" name="first_name" placeholder="First Name" class="required" required />
+      <input type="text" name="last_name" placeholder="Surname" class="required" required />
+      <input type="email" name="email" placeholder="Email Address" class="required" required />
+      <div class="password-container">
+        <input type="password" name="password" id="signupPassword" placeholder="Password" class="required" required />
+        <i class="info-icon" title="Password must contain at least 6 characters, 1 capital letter, and 1 symbol.">ℹ️</i>
+      </div>
+      <input type="password" name="confirm_password" placeholder="Confirm Password" class="required" required />
+      <button type="submit" class="sign-in-button">Create Account</button>
+    </form>
+  </div>
+
+  <script>
+    const signupPasswordInput = document.getElementById('signupPassword');
+    // Note: Your toggle icon logic is incomplete (missing toggleSignupIcon element).
+  </script>
+</body>
+</html>

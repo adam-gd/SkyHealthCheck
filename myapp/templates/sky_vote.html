@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sky Vote - Health Check</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo">
+        <div class="nav-items">
+            <a href="#">Home</a>
+            <a href="#">Health-Check</a>
+            <a href="#">Agreements</a>
+            <a href="#">Admin</a>
+            <a href="#">Overview</a>
+            <a href="#">Profile</a>
+            <a href="#">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Session Dropdown -->
+        <div class="dropdown-container">
+            <label for="session-select"><strong>Choose a session</strong></label><br>
+            <select id="session-select">
+                <option value="">-- Select a session --</option>
+                <option>Session A</option>
+                <option>Session B</option>
+                <option>Session C</option>
+                <!-- You can dynamically populate sessions here with Django later -->
+            </select>
+        </div>
+
+        <!-- Voting Bars -->
+        <div class="bar-container">
+            <div class="bar-label">Teamwork</div>
+            <div class="bar" style="width: 70%;"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label">Suitable Process</div>
+            <div class="bar" style="width: 60%;"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label">Speed</div>
+            <div class="bar" style="width: 50%;"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label">Mission</div>
+            <div class="bar" style="width: 65%;"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label">Learning</div>
+            <div class="bar" style="width: 80%;"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label">Delivering Value</div>
+            <div class="bar" style="width: 40%;"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label">Easy to Release</div>
+            <div class="bar" style="width: 55%;"></div>
+        </div>
+        <div class="bar-container">
+            <div class="bar-label">Fun</div>
+            <div class="bar" style="width: 75%;"></div>
+        </div>
+
+        <!-- Instruction -->
+        <p class="instruction">Click on the card to view/change vote</p>
+    </div>
+
+</body>
+</html>
