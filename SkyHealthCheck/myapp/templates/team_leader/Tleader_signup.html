@@ -1,0 +1,12 @@
+{% extends "base/signup_base.html" %}
+
+{% block title %}Team Leader – Create an account{% endblock %}
+{% block header %}Team Leader Signup{% endblock %}
+
+{% block login_url %}{% url "team_leader_login" %}{% endblock %}
+{% block login_tab %}Login as Leader{% endblock %}
+{% block signup_url %}{% url "team_leader_signup" %}{% endblock %}
+{% block signup_tab %}Signup{% endblock %}
+
+{% block form_action %}{% url "team_leader_signup" %}{% endblock %}
+{% block submit_text %}Sign up as Team Leader{% endblock %}

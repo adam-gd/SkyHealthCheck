@@ -78,6 +78,7 @@ LOGIN_REDIRECT_URL = 'admin_dashboard'
 
 
 LOGIN_URL = '/admin_login/'
+
 # Adjust session expiration (in seconds)
 SESSION_COOKIE_AGE = 3600  # 1 hour (default: 300 seconds)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Set to True to expire session when the browser is closed

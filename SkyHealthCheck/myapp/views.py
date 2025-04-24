@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import Http404
 from .models import CustomUser, Department, Team, HealthCard, Session, Card
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 
 # Create your views here.
@@ -14,6 +15,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
+from django.contrib.auth.models import User
 
 
 
@@ -92,42 +94,108 @@ def sky_vote_view(request):
     return render(request, 'sky_vote.html')
 
 def senior_manager_view(request):
-    return render(request, 'senior_manager.html')
+    return render(request, 'senior_manager/Smanager_login.html')
 
 def engineer_view(request):
     return render(request, 'engineer.html')
 
 def team_leader_view(request):
-    return render(request, 'team_leader.html')
+    return render(request, 'team_leader/Tleader_login.html')
 
-def department_leader_view(request):
-    return render(request, 'department_leader.html')
+def Dleader_login_view(request):
+    return render(request, 'department_leader/Dleader_login.html')
 
+from .forms import SeniorManagerSignupForm, TeamLeaderSignupForm, DepartmentLeaderSignupForm
 
+def senior_manager_signup(request):
+    if request.method == 'POST':
+        form = SeniorManagerSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('senior_manager_dashboard')
+    else:
+        form = SeniorManagerSignupForm()
+    return render(request, 'senior_manager/Smanager_signup.html', { 'form': form })
+
+def team_leader_signup(request):
+    if request.method == 'POST':
+        form = TeamLeaderSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('team_leader_dashboard')
+    else:
+        form = TeamLeaderSignupForm()
+    return render(request, 'team_leader/Tleader_signup.html', { 'form': form })
+
+def department_leader_signup(request):
+    if request.method == 'POST':
+        form = DepartmentLeaderSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('department_leader_dashboard')
+    else:
+        form = DepartmentLeaderSignupForm()
+    return render(request, 'department_leader/Dleader_signup.html', { 'form': form })
+
+CustomUser = get_user_model()
+
+# views.py
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import AdminLoginForm
+from .models import CustomUser
 
 def admin_login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        
-        # Authenticate the user
-        user = authenticate(request, username=username, password=password)
-        
-        if user is not None and user.is_staff:
-            login(request, user)
-            return redirect('admin_dashboard.html')  # Redirect to your custom admin dashboard
+        form = AdminLoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            
+            try:
+                # Try to get the user by email (assuming 'email' field is unique in CustomUser model)
+                user_obj = CustomUser.objects.get(email=email)
+                # Authenticate using the username and password
+                user = authenticate(request, username=user_obj.username, password=password)
+                
+                if user is not None:
+                    if user.is_superuser:
+                        login(request, user)
+                        messages.success(request, 'Successfully logged in as an Admin.')
+                        return redirect('admin_dashboard')  # Redirect to admin dashboard
+                    else:
+                        messages.error(request, 'Only superusers are allowed to access this area.')
+                else:
+                    messages.error(request, 'Invalid email or password.')
+            
+            except CustomUser.DoesNotExist:
+                # Handle the case where the user does not exist
+                messages.error(request, 'No user found with this email address.')
+
         else:
-            messages.error(request, 'Invalid credentials or insufficient permissions.')
-            return redirect('admin_login')
-        
-    return render(request, 'admin/admin_login.html')
+            # Form is invalid, but no need to display specific error messages here since they're handled in the form.
+            messages.error(request, 'Please check your form for errors.')
+
+    else:
+        form = AdminLoginForm()
+
+    return render(request, 'admin/admin_login.html', {'form': form})
+
 
 
 def admin_signup_view(request):
     return render(request, 'admin/admin_signup.html')
 
 
-@login_required
+def is_superuser(user):
+    return user.is_superuser
+
+# @user_passes_test(is_superuser)
+# @login_required
 def admin_dashboard_view(request):
     return render(request, 'admin/admin_dashboard.html')
 

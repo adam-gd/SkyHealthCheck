@@ -1,0 +1,12 @@
+{% extends "base/signup_base.html" %}
+
+{% block title %}Senior Manager – Create an account{% endblock %}
+{% block header %}Senior Manager Signup{% endblock %}
+
+{% block login_url %}{% url "senior_manager_login" %}{% endblock %}
+{% block login_tab %}Login as Manager{% endblock %}
+{% block signup_url %}{% url "senior_manager_signup" %}{% endblock %}
+{% block signup_tab %}Signup{% endblock %}
+
+{% block form_action %}{% url "senior_manager_signup" %}{% endblock %}
+{% block submit_text %}Sign up as Senior Manager{% endblock %}

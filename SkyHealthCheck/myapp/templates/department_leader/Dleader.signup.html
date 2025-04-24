@@ -1,0 +1,12 @@
+{% extends "base/signup_base.html" %}
+
+{% block title %}Dept. Leader – Create an account{% endblock %}
+{% block header %}Department Leader Signup{% endblock %}
+
+{% block login_url %}{% url "department_leader_login" %}{% endblock %}
+{% block login_tab %}Login as Dept. Leader{% endblock %}
+{% block signup_url %}{% url "department_leader_signup" %}{% endblock %}
+{% block signup_tab %}Signup{% endblock %}
+
+{% block form_action %}{% url "department_leader_signup" %}{% endblock %}
+{% block submit_text %}Sign up as Department Leader{% endblock %}

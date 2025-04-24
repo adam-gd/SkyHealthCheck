@@ -4,16 +4,18 @@
 {% block header %}Admin Login{% endblock %}
 
 {% block form %}
-  <form method="post" action="{% url 'admin_login' %}">
+  <form method="POST" action="{% url 'admin_login' %}">
     {% csrf_token %}
+    
     <div class="form-group">
-      <input type="text" name="username" class="form-control" placeholder="Admin Username" required>
+      {{ form.email }}  <!-- Render the email field -->
     </div>
+
     <div class="form-group password-container">
-      <svg class="password-icon" ...>...</svg>
-      <input type="password" name="password" class="form-control" placeholder="Password" required>
+      {{ form.password }}  <!-- Render the password field -->
     </div>
-    <button href="{% url 'admin_dashboard' %}" type="submit" class="sign-in-button">Sign In</button>
+
+    <button type="submit" class="sign-in-button">Sign In</button>
   </form>
   
   <div class="sign-up-container">

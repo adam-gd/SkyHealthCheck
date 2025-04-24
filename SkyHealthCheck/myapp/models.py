@@ -49,6 +49,8 @@ class CustomUser(AbstractUser):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='engineer')
     pass 
 
+email = models.EmailField(unique=True)
+
 class Card(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
