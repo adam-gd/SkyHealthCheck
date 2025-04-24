@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sky Profile</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f5f5f5;
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .logo-title img {
+      height: 50px;
+      display: block;
+    }
+    .logo-title h1 {
+      font-size: 28px;
+      font-weight: normal;
+      color: #333;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      background-color: #f0e8fa;
+      border-radius: 50px;
+      padding: 5px 15px;
+      width: 300px;
+    }
+    .search-container input,
+    .search-container span {
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      color: #333;
+    }
+    .search-icon {
+      color: #666;
+      cursor: pointer;
+    }
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .profile-btn {
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logout-btn {
+      background-color: #111;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .settings-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+      gap: 10px;
+      background-color: white;
+    }
+    .nav-btn {
+      background-color: #ffd180;
+      border: 1px solid #e0a030;
+      border-radius: 5px;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      width: 150px;
+      text-align: center;
+    }
+    .nav-btn:hover {
+      background-color: #ffb74d;
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    .profile-image-container {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      background-color: #333;
+      border-radius: 20px;
+      margin-bottom: 15px;
+    }
+    .edit-picture-btn {
+      background-color: #ffd180;
+      border: 1px solid #e0a030;
+      border-radius: 5px;
+      padding: 8px 15px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .profile-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      gap: 15px;
+      width: 100%;
+      align-items: center;
+    }
+    .form-control {
+      flex-grow: 1;
+      padding: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    .edit-btn {
+      background-color: #ffd180;
+      border: 1px solid #e0a030;
+      border-radius: 5px;
+      padding: 12px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-title">
+      <!-- ← corrected to use Django static -->
+      <img src="{% static 'myapp/sky_logo.png' %}" alt="Sky Logo">
+      <h1>Profile</h1>
+    </div>
+    <div class="search-container">
+      <!-- turned <span> into the visible placeholder -->
+      <span>Hinted search text</span>
+      <div class="search-icon">
+        <!-- search icon SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001
+                   c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0
+                   1.415-1.414l-3.85-3.85a1.007 1.007 0 0
+                   0-.115-.1zM12 6.5a5.5 5.5 0 1
+                   1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="user-actions">
+      <button class="profile-btn">👤</button>
+      <button class="logout-btn">Logout</button>
+      <button class="settings-btn">⚙️</button>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button class="nav-btn">Home</button>
+    <button class="nav-btn">Health‑Check</button>
+    <button class="nav-btn">Agreements</button>
+    <button class="nav-btn">Admin</button>
+    <button class="nav-btn">Overview</button>
+  </div>
+
+  <div class="content">
+    <div class="profile-image-container">
+      <div class="profile-image"></div>
+      <button class="edit-picture-btn">Edit Profile picture</button>
+    </div>
+
+    <div class="profile-form">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username">
+        <button class="edit-btn">Edit Username</button>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email">
+        <button class="edit-btn">Edit Email</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

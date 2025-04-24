@@ -1,0 +1,56 @@
+{% extends "base/signup_base.html" %}
+{% load static %}
+
+{# 1. Change the page title #}
+{% block title %}Sky – Create an account{% endblock %}
+
+{# 2. Change the header text #}
+{% block header %}Create an account{% endblock %}
+
+{# 3. Mark the signup tab active #}
+{% block signup_tab_active %}active{% endblock %}
+
+{# 4. Supply your signup form markup #}
+{% block form %}
+  <form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <input name="first_name" type="text"
+             class="form-control required-field"
+             placeholder="First Name *" required>
+    </div>
+
+    <div class="form-group">
+      <input name="last_name" type="text"
+             class="form-control required-field"
+             placeholder="Surname *" required>
+    </div>
+
+    <div class="form-group">
+      <input name="email" type="email"
+             class="form-control required-field"
+             placeholder="Email Address *" required>
+    </div>
+
+    <div class="form-group password-container">
+      <input name="password1" type="password"
+             class="form-control required-field"
+             placeholder="Password *" required>
+      <!-- Info‐icon SVG stays the same -->
+      <svg class="info-icon" viewBox="0 0 24 24" …>
+        <circle cx="12" cy="12" r="10" stroke="black" stroke-width="2"/>
+        <path d="M12 7V12" stroke="black" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="16" r="1" fill="black"/>
+      </svg>
+    </div>
+
+    <div class="form-group">
+      <input name="password2" type="password"
+             class="form-control required-field"
+             placeholder="Confirm Password *" required>
+    </div>
+
+    <button type="submit" class="submit-button">Create Account</button>
+  </form>
+{% endblock %}
