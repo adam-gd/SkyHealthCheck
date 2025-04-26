@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Leader - Sky</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-left img {
+            height: 40px;
+        }
+        .navbar-left span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .navbar-center {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            background-color: #f2edf9;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .navbar-right .profile,
+        .navbar-right .logout,
+        .navbar-right .settings {
+            cursor: pointer;
+        }
+        .logout {
+            background-color: black;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .menu-bar {
+            margin-top: 10px;
+            background-color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .menu-bar a {
+            background-color: #f9c270;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+        }
+        .menu-bar a:hover {
+            background-color: #f0ad4e;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 60px;
+            gap: 40px;
+        }
+        .content a {
+            background-color: #f9c270;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            color: black;
+        }
+        .content a:hover {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sky_Group_logo_2020.svg/2560px-Sky_Group_logo_2020.svg.png" alt="Sky Logo" height="30">
+            <span>Team Leader - {{ user.first_name }} {{ user.last_name }}</span>
+        </div>
+        <div class="navbar-center">
+            <form action="{% url 'search' %}" method="get">
+                {% csrf_token %}
+                <input type="text" name="q" class="search-bar" placeholder="Search teams or cards" value="{{ query|default_if_none:'' }}">
+            </form>
+        </div>
+        <div class="navbar-right">
+            <a href="{% url 'update_profile' %}" class="profile">Profile</a>
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+            <div class="settings">⚙️</div>
+        </div>
+    </div>
+    <div class="menu-bar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'sky_vote' %}">Health-Check</a>
+        <a href="{% url 'agreements' %}">Agreements</a>
+        <a href="{% url 'admin_dashboard' %}">Admin</a>
+        <a href="{% url 'overview' %}">Overview</a>
+    </div>
+    <div class="content">
+        <a href="{% url 'team_cards' %}">View Teams</a>
+        <a href="{% url 'team_cards' %}">View Cards</a>
+        <a href="{% url 'cards_progress' %}">See Cards Progress</a>
+        <a href="{% url 'other_department_progress' %}">See Other Department Progress</a>
+    </div>
+</body>
+</html>

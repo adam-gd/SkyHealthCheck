@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Teams and Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f9c270;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+    {% if team %}
+        <h1>Teams in {{ team.department.name }}</h1>
+        {% if teams %}
+            <ul>
+            {% for t in teams %}
+                <li>{{ t.name }} (Leader: {{ t.leader.username|default:"None" }})</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No teams found in your department.</p>
+        {% endif %}
+        <h2>Health Cards for {{ team.name }}</h2>
+        {% if cards %}
+            <ul>
+            {% for card in cards %}
+                <li>{{ card.title }} - {{ card.description }}</li>
+            {% Hannah: The template is already Django-compatible with CSRF tokens and URL tags.
+- **Linked Buttons**: The “View Teams” and “View Cards” buttons both link to the `team_cards` view, as they display both teams and cards in the updated template.
+- **Styling**: Consistent with `team_leader.html` for a cohesive look.
+- **Back Link**: Includes a link back to the team leader dashboard.
+
+#### 6. Create `cards_progress.html`
+Create a new template to display vote progress for health cards.
+
+<xaiArtifact artifact_id="70722017-bcc8-4bfd-9f86-b179b9df8326" artifact_version_id="474b2e24-7b2e-433b-9773-71efaf4e8066" title="cards_progress.html" contentType="text/html">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cards Progress</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f9c270;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+    {% if team %}
+        <h1>Health Card Progress for {{ team.name }}</h1>
+        {% if progress_summary %}
+            <ul>
+            {% for card_title, votes in progress_summary.items %}
+                <li>{{ card_title }}: Green: {{ votes.green }}, Amber: {{ votes.amber }}, Red: {{ votes.red }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No vote data available for your team.</p>
+        {% endif %}
+    {% else %}
+        <p>You are not assigned as a leader to any team.</p>
+    {% endif %}
+    <a href="{% url 'team_leader_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

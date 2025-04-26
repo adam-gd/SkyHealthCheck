@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f9c270;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results for "{{ query }}"</h1>
+    <h2>Teams</h2>
+    {% if teams %}
+        <ul>
+        {% for team in teams %}
+            <li>{{ team.name }} (Department: {{ team.department.name }})</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No teams found.</p>
+    {% endif %}
+    <h2>Health Cards</h2>
+    {% if cards %}
+        <ul>
+        {% for card in cards %}
+            <li>{{ card.title }} - {{ card.description }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No health cards found.</p>
+    {% endif %}
+    <a href="{% url 'team_leader_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

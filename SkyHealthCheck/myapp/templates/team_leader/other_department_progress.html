@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Other Department Progress</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f9c270;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Other Department Progress</h1>
+    {% if dept_progress %}
+        {% for dept_name, summary in dept_progress.items %}
+            <h2>{{ dept_name }}</h2>
+            {% if summary %}
+                <ul>
+                {% for card_title, votes in summary.items %}
+                    <li>{{ card_title }}: Green: {{ votes.green }}, Amber: {{ votes.amber }}, Red: {{ votes.red }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No vote data available for {{ dept_name }}.</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No data available for other departments.</p>
+    {% endif %}
+    <a href="{% url 'team_leader_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
